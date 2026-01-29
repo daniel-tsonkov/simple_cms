@@ -1,0 +1,92 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: simple-cms-alerts
+  namespace: monitoring
+  labels:
+    app: simple-cms
+    release: prometheus
+spec:
+  groups:
+    - name: simple-cms
+      interval: 30s
+      rules:
+        # High Error Rate Alert
+        - alert: HighErrorRate
+          expr: |
+            sum(rate(http_requests_total{namespace="simple-cms",status_code=~"5.."}[5m])) 
+            / 
+            sum(rate(http_requests_total{namespace="simple-cms"}[5m])) 
+            > 0.05
+          for: 5m
+          labels:
+            severity: warning
+            component: backend
+          annotations:
+            summary: "High error rate detected"
+            description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes"
+
+        # High Response Time Alert
+        - alert: HighResponseTime
+          expr: |
+            histogram_quantile(0.95, 
+              rate(http_request_duration_seconds_bucket{namespace="simple-cms"}[5m])
+            ) > 2
+          for: 5m
+          labels:
+            severity: warning
+            component: backend
+          annotations:
+            summary: "High response time detected"
+            description: "95th percentile response time is {{ $value }}s"
+
+        # Pod Down Alert
+        - alert: PodDown
+          expr: |
+            kube_pod_status_phase{namespace="simple-cms",phase="Running"} == 0
+          for: 2m
+          labels:
+            severity: critical
+            component: infrastructure
+          annotations:
+            summary: "Pod is down"
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is not running"
+
+        # High CPU Usage Alert
+        - alert: HighCPUUsage
+          expr: |
+            rate(container_cpu_usage_seconds_total{namespace="simple-cms"}[5m]) > 0.8
+          for: 10m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "High CPU usage detected"
+            description: "CPU usage is {{ $value | humanizePercentage }} for pod {{ $labels.pod }}"
+
+        # High Memory Usage Alert
+        - alert: HighMemoryUsage
+          expr: |
+            container_memory_usage_bytes{namespace="simple-cms"} 
+            / 
+            container_spec_memory_limit_bytes{namespace="simple-cms"} 
+            > 0.9
+          for: 5m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "High memory usage detected"
+            description: "Memory usage is {{ $value | humanizePercentage }} for pod {{ $labels.pod }}"
+
+        # Container Restart Alert
+        - alert: ContainerRestarting
+          expr: |
+            rate(kube_pod_container_status_restarts_total{namespace="simple-cms"}[15m]) > 0
+          for: 5m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "Container is restarting"
+            description: "Container {{ $labels.container }} in pod {{ $labels.pod }} has restarted {{ $value }} times in the last 15 minutes"

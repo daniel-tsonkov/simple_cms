@@ -1,0 +1,29 @@
+{
+  "name": "simple-cms",
+  "version": "1.0.0",
+  "description": "Simple CMS with DevOps Pipeline",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "lint": "cd backend && npm run lint",
+    "test": "cd backend && npm test",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "setup": "chmod +x scripts/*.sh && ./scripts/setup-env.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniel-tsonkov/simple-cms"
+  },
+  "keywords": [
+    "cms",
+    "devops",
+    "kubernetes",
+    "gitops",
+    "ci-cd"
+  ],
+  "author": "Daniel Tsonkov",
+  "license": "MIT"
+}
