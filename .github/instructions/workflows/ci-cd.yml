@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 env:
-  IMAGE_NAME: simple-cms
+  IMAGE_NAME: simple_cms
   REGISTRY: ghcr.io
   TAG: ${{ github.sha }}
 
@@ -87,7 +87,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-backend
+          images: ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-backend
           tags: |
             type=sha,prefix=,format=short
             type=ref,event=branch
@@ -99,8 +99,8 @@ jobs:
           context: ./backend
           push: true
           tags: |
-            ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-backend:${{ env.TAG }}
-            ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-backend:latest
+            ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-backend:${{ env.TAG }}
+            ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-backend:latest
           labels: ${{ steps.meta.outputs.labels }}
 
   build-frontend:
@@ -126,8 +126,8 @@ jobs:
           context: ./frontend
           push: true
           tags: |
-            ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-frontend:${{ env.TAG }}
-            ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-frontend:latest
+            ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-frontend:${{ env.TAG }}
+            ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-frontend:latest
 
   scan-backend-image:
     name: Scan Backend Image
@@ -137,7 +137,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-backend:${{ env.TAG }}
+          image-ref: ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-backend:${{ env.TAG }}
           format: "sarif"
           output: "trivy-results.sarif"
           severity: "CRITICAL,HIGH"
@@ -156,7 +156,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.REGISTRY }}/mtsonkova/${{ env.IMAGE_NAME }}-frontend:${{ env.TAG }}
+          image-ref: ${{ env.REGISTRY }}/daniel-tsonkov/${{ env.IMAGE_NAME }}-frontend:${{ env.TAG }}
           format: "table"
           severity: "CRITICAL,HIGH"
 
@@ -169,19 +169,19 @@ jobs:
       - name: Checkout GitOps repository
         uses: actions/checkout@v4
         with:
-          repository: mtsonkova/simple-cms-gitops
+          repository: daniel-tsonkov/simple_cms-gitops
           token: ${{ secrets.GITOPS_PAT }}
           path: gitops
 
       - name: Update backend image tag
         run: |
           cd gitops
-          sed -i "s|image: ghcr.io/.*/simple-cms-backend:.*|image: ghcr.io/mtsonkova/simple-cms-backend:${{ env.TAG }}|" k8s/deployment.yaml
+          sed -i "s|image: ghcr.io/.*/simple_cms-backend:.*|image: ghcr.io/daniel-tsonkov/simple_cms-backend:${{ env.TAG }}|" k8s/deployment.yaml
 
       - name: Update frontend image tag
         run: |
           cd gitops
-          sed -i "s|image: ghcr.io/.*/simple-cms-frontend:.*|image: ghcr.io/mtsonkova/simple-cms-frontend:${{ env.TAG }}|" k8s/deployment.yaml
+          sed -i "s|image: ghcr.io/.*/simple_cms-frontend:.*|image: ghcr.io/daniel-tsonkov/simple_cms-frontend:${{ env.TAG }}|" k8s/deployment.yaml
 
       - name: Commit and push changes
         run: |
