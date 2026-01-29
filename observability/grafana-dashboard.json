@@ -1,7 +1,7 @@
 {
   "dashboard": {
     "title": "Simple CMS Metrics",
-    "tags": ["simple-cms", "devops"],
+    "tags": ["simple_cms", "devops"],
     "timezone": "browser",
     "panels": [
       {
@@ -11,7 +11,7 @@
         "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
         "targets": [
           {
-            "expr": "rate(http_requests_total{namespace=\"simple-cms\"}[5m])",
+            "expr": "rate(http_requests_total{namespace=\"simple_cms\"}[5m])",
             "legendFormat": "{{method}} {{route}}"
           }
         ],
@@ -27,11 +27,11 @@
         "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
         "targets": [
           {
-            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{namespace=\"simple-cms\"}[5m]))",
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{namespace=\"simple_cms\"}[5m]))",
             "legendFormat": "p95 - {{method}} {{route}}"
           },
           {
-            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket{namespace=\"simple-cms\"}[5m]))",
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket{namespace=\"simple_cms\"}[5m]))",
             "legendFormat": "p50 - {{method}} {{route}}"
           }
         ],
@@ -47,7 +47,7 @@
         "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
         "targets": [
           {
-            "expr": "sum(rate(http_requests_total{namespace=\"simple-cms\",status_code=~\"5..\"}[5m])) / sum(rate(http_requests_total{namespace=\"simple-cms\"}[5m])) * 100",
+            "expr": "sum(rate(http_requests_total{namespace=\"simple_cms\",status_code=~\"5..\"}[5m])) / sum(rate(http_requests_total{namespace=\"simple_cms\"}[5m])) * 100",
             "legendFormat": "Error Rate"
           }
         ],
@@ -63,7 +63,7 @@
         "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
         "targets": [
           {
-            "expr": "active_connections{namespace=\"simple-cms\"}",
+            "expr": "active_connections{namespace=\"simple_cms\"}",
             "legendFormat": "{{pod}}"
           }
         ],
@@ -79,7 +79,7 @@
         "gridPos": { "h": 4, "w": 6, "x": 0, "y": 16 },
         "targets": [
           {
-            "expr": "sum(kube_pod_container_status_restarts_total{namespace=\"simple-cms\"})"
+            "expr": "sum(kube_pod_container_status_restarts_total{namespace=\"simple_cms\"})"
           }
         ]
       },
@@ -90,7 +90,7 @@
         "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
         "targets": [
           {
-            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"simple-cms\"}[5m])",
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"simple_cms\"}[5m])",
             "legendFormat": "{{pod}}"
           }
         ],
@@ -106,7 +106,7 @@
         "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
         "targets": [
           {
-            "expr": "container_memory_usage_bytes{namespace=\"simple-cms\"}",
+            "expr": "container_memory_usage_bytes{namespace=\"simple_cms\"}",
             "legendFormat": "{{pod}}"
           }
         ],

@@ -1,22 +1,22 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: simple-cms-alerts
+  name: simple_cms-alerts
   namespace: monitoring
   labels:
-    app: simple-cms
+    app: simple_cms
     release: prometheus
 spec:
   groups:
-    - name: simple-cms
+    - name: simple_cms
       interval: 30s
       rules:
         # High Error Rate Alert
         - alert: HighErrorRate
           expr: |
-            sum(rate(http_requests_total{namespace="simple-cms",status_code=~"5.."}[5m])) 
+            sum(rate(http_requests_total{namespace="simple_cms",status_code=~"5.."}[5m])) 
             / 
-            sum(rate(http_requests_total{namespace="simple-cms"}[5m])) 
+            sum(rate(http_requests_total{namespace="simple_cms"}[5m])) 
             > 0.05
           for: 5m
           labels:
@@ -30,7 +30,7 @@ spec:
         - alert: HighResponseTime
           expr: |
             histogram_quantile(0.95, 
-              rate(http_request_duration_seconds_bucket{namespace="simple-cms"}[5m])
+              rate(http_request_duration_seconds_bucket{namespace="simple_cms"}[5m])
             ) > 2
           for: 5m
           labels:
@@ -43,7 +43,7 @@ spec:
         # Pod Down Alert
         - alert: PodDown
           expr: |
-            kube_pod_status_phase{namespace="simple-cms",phase="Running"} == 0
+            kube_pod_status_phase{namespace="simple_cms",phase="Running"} == 0
           for: 2m
           labels:
             severity: critical
@@ -55,7 +55,7 @@ spec:
         # High CPU Usage Alert
         - alert: HighCPUUsage
           expr: |
-            rate(container_cpu_usage_seconds_total{namespace="simple-cms"}[5m]) > 0.8
+            rate(container_cpu_usage_seconds_total{namespace="simple_cms"}[5m]) > 0.8
           for: 10m
           labels:
             severity: warning
@@ -67,9 +67,9 @@ spec:
         # High Memory Usage Alert
         - alert: HighMemoryUsage
           expr: |
-            container_memory_usage_bytes{namespace="simple-cms"} 
+            container_memory_usage_bytes{namespace="simple_cms"} 
             / 
-            container_spec_memory_limit_bytes{namespace="simple-cms"} 
+            container_spec_memory_limit_bytes{namespace="simple_cms"} 
             > 0.9
           for: 5m
           labels:
@@ -82,7 +82,7 @@ spec:
         # Container Restart Alert
         - alert: ContainerRestarting
           expr: |
-            rate(kube_pod_container_status_restarts_total{namespace="simple-cms"}[15m]) > 0
+            rate(kube_pod_container_status_restarts_total{namespace="simple_cms"}[15m]) > 0
           for: 5m
           labels:
             severity: warning

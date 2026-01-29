@@ -42,7 +42,7 @@
             ┌─────────────────────┐
             │  Kubernetes Cluster  │
             │  ┌────────────────┐  │
-            │  │  simple-cms    │  │
+            │  │  simple_cms    │  │
             │  │   namespace    │  │
             │  └────────────────┘  │
             └──────────┬───────────┘
@@ -89,16 +89,16 @@
 
 ### 3. GitOps with ArgoCD
 
-- **Repository**: `simple-cms-gitops`
+- **Repository**: `simple_cms-gitops`
 - **Sync Policy**: Automated (self-heal, prune)
-- **Target**: Kubernetes `simple-cms` namespace
+- **Target**: Kubernetes `simple_cms` namespace
 - **Deployment Strategy**: Rolling update
 
 ### 4. Infrastructure
 
 #### Kubernetes Resources
 
-- **Namespaces**: `simple-cms`, `argocd`, `monitoring`
+- **Namespaces**: `simple_cms`, `argocd`, `monitoring`
 - **Deployments**: Backend (3 replicas), Frontend (2 replicas)
 - **Services**: ClusterIP (backend), LoadBalancer (frontend)
 - **ServiceMonitor**: Prometheus scraping configuration

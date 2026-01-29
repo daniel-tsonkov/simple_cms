@@ -1,5 +1,5 @@
 {
-  "name": "simple-cms",
+  "name": "simple_cms",
   "version": "1.0.0",
   "description": "Simple CMS with DevOps Pipeline",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/daniel-tsonkov/simple-cms"
+    "url": "https://github.com/daniel-tsonkov/simple_cms"
   },
   "keywords": [
     "cms",

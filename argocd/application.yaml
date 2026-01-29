@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple-cms
+  name: simple_cms
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,13 +9,13 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/mtsonkova/simple-cms-gitops
+    repoURL: https://github.com/daniel-tsonkov/simple_cms-gitops
     targetRevision: HEAD
     path: k8s
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: simple-cms
+    namespace: simple_cms
 
   syncPolicy:
     automated:

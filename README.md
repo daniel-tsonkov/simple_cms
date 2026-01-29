@@ -2,10 +2,10 @@
 
 A full-stack web application with automated software delivery pipeline covering 15+ DevOps topics.
 
-[![CI/CD Pipeline](https://github.com/mtsonkova/simple-cms/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/mtsonkova/simple-cms/actions)
+[![CI/CD Pipeline](https://github.com/daniel-tsonkov/simple_cms/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/daniel-tsonkov/simple_cms/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Note**: This is a fork of [daniel-tsonkov/simple-cms](https://github.com/daniel-tsonkov/simple-cms) with DevOps pipeline implementation.
+> **Note**: This is a fork of [daniel-tsonkov/simple_cms](https://github.com/daniel-tsonkov/simple_cms) with DevOps pipeline implementation.
 
 ## 📋 Table of Contents
 
@@ -84,7 +84,7 @@ Simple CMS is a demonstration project showcasing a complete DevOps pipeline with
        ▼
 ┌──────────────────────────────────┐
 │  GitHub Repository               │
-│  mtsonkova/simple-cms            │
+│  daniel-tsonkov/simple_cms            │
 └──────────┬───────────────────────┘
            │
            ▼
@@ -99,7 +99,7 @@ Simple CMS is a demonstration project showcasing a complete DevOps pipeline with
            ▼
 ┌───────────────────────────────────┐
 │   GitOps Repository               │
-│   mtsonkova/simple-cms-gitops     │
+│   daniel-tsonkov/simple_cms-gitops     │
 └──────────┬────────────────────────┘
            │
            ▼
@@ -111,7 +111,7 @@ Simple CMS is a demonstration project showcasing a complete DevOps pipeline with
 ┌──────────────────────┐
 │    Kubernetes        │
 │  ┌──────────────┐    │
-│  │  simple-cms  │    │
+│  │  simple_cms  │    │
 │  └──────────────┘    │
 └──────────┬───────────┘
            │
@@ -137,8 +137,8 @@ Simple CMS is a demonstration project showcasing a complete DevOps pipeline with
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/mtsonkova/simple-cms.git
-cd simple-cms
+git clone https://github.com/daniel-tsonkov/simple_cms.git
+cd simple_cms
 ```
 
 2. **Run setup script**
@@ -252,9 +252,9 @@ Security is built into every layer:
 
 ## 📦 Related Repositories
 
-- **Application Repo**: [mtsonkova/simple-cms](https://github.com/mtsonkova/simple-cms)
-- **GitOps Repo**: [mtsonkova/simple-cms-gitops](https://github.com/mtsonkova/simple-cms-gitops)
-- **Original Repo**: [daniel-tsonkov/simple-cms](https://github.com/daniel-tsonkov/simple-cms)
+- **Application Repo**: [daniel-tsonkov/simple_cms](https://github.com/daniel-tsonkov/simple_cms)
+- **GitOps Repo**: [daniel-tsonkov/simple_cms-gitops](https://github.com/daniel-tsonkov/simple_cms-gitops)
+- **Original Repo**: [daniel-tsonkov/simple_cms](https://github.com/daniel-tsonkov/simple_cms)
 
 ## 🤝 Contributing
 
@@ -268,8 +268,8 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 **Mariya Tsonkova**
 
-- GitHub: [@mtsonkova](https://github.com/mtsonkova)
-- Original Project: [daniel-tsonkov/simple-cms](https://github.com/daniel-tsonkov/simple-cms)
+- GitHub: [@daniel-tsonkov](https://github.com/daniel-tsonkov)
+- Original Project: [daniel-tsonkov/simple_cms](https://github.com/daniel-tsonkov/simple_cms)
 
 ## 🙏 Acknowledgments
 
@@ -284,7 +284,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 #!/bin/bash
 
-# Complete Setup Commands for mtsonkova/simple-cms
+# Complete Setup Commands for daniel-tsonkov/simple_cms
 
 # ============================================
 
@@ -292,8 +292,8 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 # ============================================
 
-git clone https://github.com/mtsonkova/simple-cms.git
-cd simple-cms
+git clone https://github.com/daniel-tsonkov/simple_cms.git
+cd simple_cms
 
 # ============================================
 
@@ -301,18 +301,18 @@ cd simple-cms
 
 # ============================================
 
-# On GitHub: Create new repository named "simple-cms-gitops"
+# On GitHub: Create new repository named "simple_cms-gitops"
 
 # Then run:
 
 cd ..
-git clone https://github.com/mtsonkova/simple-cms-gitops.git
-cd simple-cms-gitops
+git clone https://github.com/daniel-tsonkov/simple_cms-gitops.git
+cd simple_cms-gitops
 
-# Copy k8s manifests from simple-cms
+# Copy k8s manifests from simple_cms
 
 mkdir k8s
-cp ../simple-cms/k8s/\*.yaml k8s/
+cp ../simple_cms/k8s/\*.yaml k8s/
 
 # Create README for GitOps repo
 
@@ -334,13 +334,13 @@ k8s/
 
 ## 🔄 Automated Updates
 
-The `deployment.yaml` file is automatically updated by the CI/CD pipeline in the [mtsonkova/simple-cms](https://github.com/mtsonkova/simple-cms) repository when new images are built.
+The `deployment.yaml` file is automatically updated by the CI/CD pipeline in the [daniel-tsonkov/simple_cms](https://github.com/daniel-tsonkov/simple_cms) repository when new images are built.
 
-**ArgoCD Application:** See [simple-cms/argocd/application.yaml](https://github.com/mtsonkova/simple-cms/blob/main/argocd/application.yaml)
+**ArgoCD Application:** See [simple_cms/argocd/application.yaml](https://github.com/daniel-tsonkov/simple_cms/blob/main/argocd/application.yaml)
 
 ## ⚠️ Manual Changes
 
-Do not edit manifests directly in this repository unless you know what you're doing. Changes should be made in the [simple-cms repository](https://github.com/mtsonkova/simple-cms) first.
+Do not edit manifests directly in this repository unless you know what you're doing. Changes should be made in the [simple_cms repository](https://github.com/daniel-tsonkov/simple_cms) first.
 EOF
 
 # Commit and push
@@ -358,7 +358,7 @@ git push origin main
 echo "
 🔐 GitHub Secrets Setup:
 
-1. Go to: https://github.com/mtsonkova/simple-cms/settings/secrets/actions
+1. Go to: https://github.com/daniel-tsonkov/simple_cms/settings/secrets/actions
 
 2. Click 'New repository secret'
 
@@ -378,9 +378,9 @@ echo "
 echo "
 📦 After first pipeline run, make images public:
 
-1. Go to: https://github.com/mtsonkova?tab=packages
+1. Go to: https://github.com/daniel-tsonkov?tab=packages
 
-2. Click on 'simple-cms-backend' package
+2. Click on 'simple_cms-backend' package
 
 3. Click 'Package settings'
 
@@ -388,7 +388,7 @@ echo "
 
 5. Click 'Change visibility' → 'Public'
 
-6. Repeat for 'simple-cms-frontend' package
+6. Repeat for 'simple_cms-frontend' package
    "
 
 # ============================================
@@ -397,7 +397,7 @@ echo "
 
 # ============================================
 
-cd ../simple-cms
+cd ../simple_cms
 
 # Make scripts executable
 
@@ -429,7 +429,7 @@ kubectl apply -f argocd/application.yaml
 
 Then check status:
 
-kubectl get application simple-cms -n argocd
+kubectl get application simple_cms -n argocd
 "
 
 # ============================================
@@ -453,7 +453,7 @@ git push origin main
 
 # Watch pipeline at:
 
-https://github.com/mtsonkova/simple-cms/actions
+https://github.com/daniel-tsonkov/simple_cms/actions
 "
 
 # ============================================
@@ -496,10 +496,10 @@ echo "
    kubectl get pods -n monitoring
 
 4. Application deployed:
-   kubectl get pods -n simple-cms
+   kubectl get pods -n simple_cms
 
 5. Pipeline passed:
-   Check: https://github.com/mtsonkova/simple-cms/actions
+   Check: https://github.com/daniel-tsonkov/simple_cms/actions
 
 6. ArgoCD synced:
    Check: https://localhost:8080

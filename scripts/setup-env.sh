@@ -22,10 +22,10 @@ echo -e "${GREEN}✅ All prerequisites met${NC}"
 
 # Create Kind cluster
 echo -e "\n${YELLOW}📦 Creating Kind cluster...${NC}"
-if kind get clusters | grep -q "simple-cms"; then
-    echo -e "${YELLOW}⚠️  Cluster 'simple-cms' already exists. Skipping...${NC}"
+if kind get clusters | grep -q "simple_cms"; then
+    echo -e "${YELLOW}⚠️  Cluster 'simple_cms' already exists. Skipping...${NC}"
 else
-    cat <<EOF | kind create cluster --name simple-cms --config=-
+    cat <<EOF | kind create cluster --name simple_cms --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:

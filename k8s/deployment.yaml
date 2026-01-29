@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-cms-backend
-  namespace: simple-cms
+  name: simple_cms-backend
+  namespace: simple_cms
   labels:
-    app: simple-cms
+    app: simple_cms
     component: backend
 spec:
   replicas: 3
@@ -15,12 +15,12 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: simple-cms
+      app: simple_cms
       component: backend
   template:
     metadata:
       labels:
-        app: simple-cms
+        app: simple_cms
         component: backend
       annotations:
         prometheus.io/scrape: "true"
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/mtsonkova/simple-cms-backend:latest
+          image: ghcr.io/daniel-tsonkov/simple_cms-backend:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -73,10 +73,10 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-cms-frontend
-  namespace: simple-cms
+  name: simple_cms-frontend
+  namespace: simple_cms
   labels:
-    app: simple-cms
+    app: simple_cms
     component: frontend
 spec:
   replicas: 2
@@ -87,17 +87,17 @@ spec:
       maxUnavailable: 0
   selector:
     matchLabels:
-      app: simple-cms
+      app: simple_cms
       component: frontend
   template:
     metadata:
       labels:
-        app: simple-cms
+        app: simple_cms
         component: frontend
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/mtsonkova/simple-cms-frontend:latest
+          image: ghcr.io/daniel-tsonkov/simple_cms-frontend:latest
           imagePullPolicy: Always
           ports:
             - name: http

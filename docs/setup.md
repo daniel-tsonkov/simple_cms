@@ -44,8 +44,8 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/daniel-tsonkov/simple-cms.git
-cd simple-cms
+git clone https://github.com/daniel-tsonkov/simple_cms.git
+cd simple_cms
 ```
 
 ### 2. Run Setup Script
@@ -84,7 +84,7 @@ kubectl get pods -n monitoring
 ### Step 1: Create Kind Cluster
 
 ```bash
-cat <<EOF | kind create cluster --name simple-cms --config=-
+cat <<EOF | kind create cluster --name simple_cms --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -146,13 +146,13 @@ kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 909
 ### 1. Create GitOps Repository
 
 ```bash
-# Create new repository on GitHub: simple-cms-gitops
-git clone https://github.com/YOUR_USERNAME/simple-cms-gitops.git
-cd simple-cms-gitops
+# Create new repository on GitHub: simple_cms-gitops
+git clone https://github.com/YOUR_USERNAME/simple_cms-gitops.git
+cd simple_cms-gitops
 
 # Copy k8s manifests
 mkdir k8s
-cp -r ../simple-cms/k8s/* k8s/
+cp -r ../simple_cms/k8s/* k8s/
 
 git add .
 git commit -m "Initial commit"
@@ -225,7 +225,7 @@ git push origin main
 
 ### 2. Watch CI/CD Pipeline
 
-- Go to: https://github.com/YOUR_USERNAME/simple-cms/actions
+- Go to: https://github.com/YOUR_USERNAME/simple_cms/actions
 - Watch the workflow run
 
 ### 3. Monitor ArgoCD Sync
@@ -238,13 +238,13 @@ git push origin main
 
 ```bash
 # Get frontend service
-kubectl get svc -n simple-cms simple-cms-frontend
+kubectl get svc -n simple_cms simple_cms-frontend
 
 # If using LoadBalancer (cloud), get external IP
-kubectl get svc -n simple-cms simple-cms-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+kubectl get svc -n simple_cms simple_cms-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
 # For Kind, use port-forward
-kubectl port-forward svc/simple-cms-frontend -n simple-cms 8081:80
+kubectl port-forward svc/simple_cms-frontend -n simple_cms 8081:80
 # Access: http://localhost:8081
 ```
 
@@ -268,7 +268,7 @@ Import dashboard:
 - Query examples:
   - `rate(http_requests_total[5m])`
   - `http_request_duration_seconds_bucket`
-  - `up{namespace="simple-cms"}`
+  - `up{namespace="simple_cms"}`
 
 ### ArgoCD
 
@@ -288,7 +288,7 @@ Import dashboard:
 
 ```bash
 # Delete Kind cluster
-kind delete cluster --name simple-cms
+kind delete cluster --name simple_cms
 
 # Stop port forwards
 pkill -f port-forward
@@ -303,23 +303,23 @@ pkill -f port-forward
 kubectl get applications -n argocd
 
 # Check application status
-kubectl describe application simple-cms -n argocd
+kubectl describe application simple_cms -n argocd
 
 # Force sync
-argocd app sync simple-cms
+argocd app sync simple_cms
 ```
 
 ### Pods Not Starting
 
 ```bash
 # Check pod status
-kubectl get pods -n simple-cms
+kubectl get pods -n simple_cms
 
 # Describe pod
-kubectl describe pod <pod-name> -n simple-cms
+kubectl describe pod <pod-name> -n simple_cms
 
 # Check logs
-kubectl logs <pod-name> -n simple-cms
+kubectl logs <pod-name> -n simple_cms
 ```
 
 ### Port Forward Stopped

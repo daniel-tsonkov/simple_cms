@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple-cms-backend
-  namespace: simple-cms
+  name: simple_cms-backend
+  namespace: simple_cms
   labels:
-    app: simple-cms
+    app: simple_cms
     component: backend
   annotations:
     prometheus.io/scrape: "true"
@@ -18,17 +18,17 @@ spec:
       targetPort: 3000
       protocol: TCP
   selector:
-    app: simple-cms
+    app: simple_cms
     component: backend
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple-cms-frontend
-  namespace: simple-cms
+  name: simple_cms-frontend
+  namespace: simple_cms
   labels:
-    app: simple-cms
+    app: simple_cms
     component: frontend
 spec:
   type: LoadBalancer
@@ -38,5 +38,5 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    app: simple-cms
+    app: simple_cms
     component: frontend

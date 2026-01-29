@@ -1,5 +1,5 @@
 {
-  "name": "simple-cms-backend",
+  "name": "simple_cms-backend",
   "version": "1.0.0",
   "description": "Simple CMS Backend with Express",
   "main": "server.js",

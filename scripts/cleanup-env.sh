@@ -19,8 +19,8 @@ echo -e "${GREEN}✅ Port forwards stopped${NC}"
 
 # Delete Kind cluster
 echo -e "\n${YELLOW}🗑️  Deleting Kind cluster...${NC}"
-if kind get clusters | grep -q "simple-cms"; then
-    kind delete cluster --name simple-cms
+if kind get clusters | grep -q "simple_cms"; then
+    kind delete cluster --name simple_cms
     echo -e "${GREEN}✅ Kind cluster deleted${NC}"
 else
     echo -e "${YELLOW}⚠️  No cluster found${NC}"
