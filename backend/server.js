@@ -21,6 +21,7 @@ const httpRequestDuration = new promClient.Histogram({
   registers: [register]
 });
 
+
 const httpRequestTotal = new promClient.Counter({
   name: 'http_requests_total',
   help: 'Total number of HTTP requests',
