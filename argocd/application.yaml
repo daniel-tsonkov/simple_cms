@@ -1,29 +1,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple_cms
+  name: simple-cms  # Changed from simple_cms to simple-cms
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-
+  
   source:
-    repoURL: https://github.com/daniel-tsonkov/simple_cms-gitops
+    repoURL: https://github.com/daniel-tsonkov/simple_cms-gitops.git
     targetRevision: HEAD
     path: k8s
-
+  
   destination:
     server: https://kubernetes.default.svc
-    namespace: simple_cms
-
+    namespace: simple-cms
+  
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true      # Automatically delete resources that are no longer in Git
+      selfHeal: true   # Automatically sync when cluster state differs from Git
       allowEmpty: false
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=true  # Automatically create the namespace if it doesn't exist
       - PrunePropagationPolicy=foreground
       - PruneLast=true
     retry:
@@ -32,11 +32,10 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 3m
-
-  revisionHistoryLimit: 10
-
+  
+  # Ignore differences in certain fields
   ignoreDifferences:
     - group: apps
       kind: Deployment
       jsonPointers:
-        - /spec/replicas
+        - /spec/replicas  # Ignore replica count differences (in case of HPA)
