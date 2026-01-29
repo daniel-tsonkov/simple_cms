@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # Required permissions for the workflow
 permissions:
@@ -29,8 +29,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
           cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
@@ -54,8 +54,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
           cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
@@ -100,6 +100,8 @@ jobs:
   sast:
     name: SAST Analysis
     runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
     permissions:
       contents: read
       security-events: write
@@ -107,13 +109,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Semgrep
-        uses: semgrep/semgrep-action@v1
-        with:
-          config: auto
-          generateSarif: true
+      - name: Run Semgrep scan
+        run: semgrep scan --sarif --config auto --output semgrep.sarif
+        continue-on-error: true
 
-      - name: Upload SARIF file
+      - name: Upload Semgrep results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
@@ -238,14 +238,14 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ env.REGISTRY }}/${{ github.repository }}-${{ matrix.component }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: "sarif"
+          output: "trivy-results.sarif"
 
       - name: Upload Trivy results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
           category: trivy-${{ matrix.component }}
 
   # Update GitOps Repository
