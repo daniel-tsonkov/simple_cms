@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple_cms-backend
-  namespace: simple_cms
+  name: simple-cms-backend
+  namespace: simple-cms
   labels:
-    app: simple_cms
+    app: simple-cms-backend
     component: backend
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -15,12 +15,12 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: simple_cms
+      app: simple-cms-backend
       component: backend
   template:
     metadata:
       labels:
-        app: simple_cms
+        app: simple-cms-backend
         component: backend
       annotations:
         prometheus.io/scrape: "true"
